@@ -1,0 +1,18 @@
+[project]
+name = "golf-coach-mcp"
+version = "0.1.0"
+description = "An MCP server that turns Claude into a golf coach: swing analysis, practice plans, round stats, and on-course strategy."
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.2.0",
+]
+
+[project.scripts]
+golf-coach-mcp = "server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["server.py"]
