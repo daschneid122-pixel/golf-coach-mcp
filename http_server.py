@@ -20,6 +20,16 @@ from starlette.responses import JSONResponse, Response
 
 from server import mcp
 
+# Public hostname on Render — disable DNS rebinding protection
+# (it's a localhost-only safety, doesn't apply to public servers)
+try:
+    mcp.settings.transport_security.enable_dns_rebinding_protection = False
+except Exception:
+    try:
+        mcp.settings.transport_security.allowed_hosts = ['*']
+    except Exception:
+        pass
+
 
 class BearerAuthMiddleware(BaseHTTPMiddleware):
     """Reject requests without a valid Bearer token in the Authorization header."""
